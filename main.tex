@@ -1,0 +1,64 @@
+
+\documentclass[12pt, parskip]{elsarticle}
+
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+
+\usepackage[left=2.5cm, right=2.5cm, top=4cm, bottom=3cm, footskip=0.5cm]{geometry}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\addbibresource{mybib.bib}
+\pagenumbering{gobble}
+
+\journal{ }
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{\textbf{Der Einfluss von Clean-Code-Prinzipien auf Unit-Tests}}
+\date{11 November 2024}
+
+\author{\textbf{Irmak Damla Özdemir}}
+
+
+\address{\textbf{Fachbereich Informatik, Technische Hochschule Würzburg-Schweinfurt}}
+\address{\textbf{Sanderheinrichsleitenweg 20, 97074, Würzburg, Germany}}
+\address{\textbf{irmakdamla.oezdemir@study.thws.de}}
+
+
+\begin{keyword}
+Unit-Tests \sep clean code 
+\end{keyword}
+
+\end{frontmatter}
+
+\section{Einleitung}
+\label{sec:sample1}
+\setlength{\parindent}{0pt}
+In der Softwarewelt, in der Qualität und Nachhaltigkeit eine grundlegende Rolle spielen, wurde das Konzept des Clean Code durch das 2008 von Robert C. Martin veröffentlichte Buch Clean Code: A Handbook of Agile Software Craftsmanship bekannt. Nach den Worten des Erfinders von C++, Bjarne Stroustrup, erleichtert Clean Code das Fehlerhandling, indem es die Sichtbarkeit von Bugs erhöht \cite{martin2009clean}. Es ist wichtig zu verstehen, was Clean Code ist und warum es wichtig ist. Ziel dieser Forschung ist es, die Rolle von Clean Code auf Unit-Tests zu untersuchen. Die Anwendung von Clean-Code-Prinzipien bietet eine solide Grundlage für Unit-Tests, die eine wichtige Rolle für die Zuverlässigkeit und Nachhaltigkeit von Programmen spielen. In diesem Zusammenhang sind Clean Code und Unit-Tests zwei Softwareentwicklungsmethoden, die sich gegenseitig unterstützen.
+
+
+\section{Methodik}
+\label{sec:another}
+\setlength{\parindent}{0pt}
+In dieser Studie wird der Einfluss der Clean-Code-Prinzipien auf Unit-Tests durch Literaturrecherche untersucht. Durch die Analyse von Source-Code-Beispielen wird interpretiert, wie lesbarer Code die Unit-Tests verändert, und es werden allgemeine Schlussfolgerungen und Feststellungen getroffen.
+
+
+
+\section{Ergebnisse}
+\label{sec:another}
+\setlength{\parindent}{0pt}
+Design ist ein wichtiger Faktor, um die Struktur der Software wartbar zu machen und ihr Verhalten unverändert zu halten. Das Entwerfen eines Programms, ohne das Verhalten des Codes zu ändern, wird als Refactoring bezeichnet.Gleichzeitig werden Tests geschrieben, um sicherzustellen, dass das bestehende Verhalten nicht verändert wird \cite{Berzal_2005}.Unit-Tests überprüfen die Funktion des Source-Codes im Programm in Form von Einheiten. An dieser Stelle erhöht die Einfachheit, Lesbarkeit und Modularität des Source-Codes im Programm die Effizienz von Unit-Tests. In einem Programm, das nach den Prinzipien von Clean Code geschrieben wurde, wird die Pflege dieser Tests einfacher und nachhaltiger. Die Optimierung des Codes nach den Prinzipien der Unabhängigkeit ermöglicht es, das Programm so effizient wie möglich umfassend zu testen. Andererseits steigt mit einem lesbaren Code und qualitativ hochwertigen Unit-Tests die Effizienz der entwickelten Programme, während die Kostenquote ebenfalls sinkt.
+
+
+
+\section{Fazit}
+\label{sec:another}
+\setlength{\parindent}{0pt}
+Obwohl seit seiner Entstehung viel Zeit vergangen ist, behalten die Clean-Code-Prinzipien ihren Platz und ihre Popularität in der Softwarewelt. Sie erscheinen weiterhin als eine Praxis, die die Effizienz und Nachhaltigkeit von Unit-Tests erhöht und das entwickelte Programm näher an die Perfektion bringt. Diese Forschung zeigt, dass der Wert von Clean Code für Unit-Tests weiterhin in hohem Maße erhalten bleibt.
+
+\printbibliography
+ 
+
+\end{document}
