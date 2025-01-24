@@ -1,0 +1,227 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{cite}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\addbibresource{mybib.bib}
+\setlength{\parindent}{0pt}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+\lstset{
+  language=Java,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{red},
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  frame=single,
+  tabsize=2,
+  breaklines=true,
+  breakatwhitespace=false,
+  captionpos=b
+}
+
+
+\title{Die Auswirkungen von Clean-Code-Prinzipien auf Unit-Tests\\}
+
+\author{\IEEEauthorblockN{Irmak Damla Özdemir}
+\IEEEauthorblockA{\textit{Informatik} \\
+\textit{Technische Hochschule Würzburg-Schweinfurt}\\
+Würzburg, Deutschland \\
+irmakdamla.oezdemir@study.thws.de}
+}
+
+\maketitle
+
+\begin{abstract}
+In der modernen Softwareentwicklung spielen Clean-Code-Prinzipien, Refactoring und Unit-Tests eine zentrale Rolle, um die Qualität, Wartbarkeit und Stabilität von Software zu gewährleisten. Diese Arbeit untersucht die Auswirkungen von Clean-Code-Prinzipien auf Unit-Tests und zeigt, wie durch die Identifikation von Code Smells und gezieltes Refactoring eine nachhaltige Codebasis geschaffen werden kann. Darüber hinaus wird beleuchtet, wie saubere und modulare Codepraktiken die Testbarkeit erhöhen, Kosten reduzieren und den Entwicklungsprozess in agilen Umgebungen effizienter gestalten. Praxisbeispiele aus verschiedenen Branchen verdeutlichen die Bedeutung dieser Ansätze in der industriellen Anwendung. Die Ergebnisse dieser Untersuchung zeigen, dass Clean Code nicht nur die technische Qualität von Software verbessert, sondern auch eine langfristige Skalierbarkeit und Wartbarkeit sicherstellt.
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+Softwaremodularität, Nachhaltige Softwareentwicklung, Reusability, Code Optimization
+
+\end{IEEEkeywords}
+
+\section{Introduction}
+In der Softwarewelt, in der Qualität und langfristige Wartbarkeit eine grundlegende Rolle
+spielen, wurde das Konzept des Clean Code durch das 2008 von Robert C. Martin veröffentlichte
+Buch ”Clean Code: A Handbook of Agile Software Craftsmanship“ bekannt. Nach den Wor-
+ten des Erfinders von C++, Bjarne Stroustrup, erleichtert Clean Code das Fehlerhandling,
+indem es die Sichtbarkeit von Bugs erhöht. \cite{martin2009clean} Ziel dieser Forschung ist es, die Rolle von 
+Clean Code auf Unit-Tests zu analysieren. Die Anwendung von Clean-Code-Prinzipien bietet eine
+solide Grundlage für Unit-Tests, die eine wichtige Rolle für die Zuverlãssigkeit und Nachhal-
+tigkeit von Programmen spielen. In diesem Zusammenhang sind Clean Code und Unit-Tests
+zwei Softwareentwicklungsmethoden, die sich gegenseitig stärken.
+
+\subsection{Die Grundprinzipien von Clean Code}
+Die Grundprinzipien von Clean Code sind universell und können unabhängig von der Programmiersprache oder der Art des Projekts angewendet werden. Im Folgenden werden die wichtigsten Prinzipien vorgestellt: \\
+
+\begin{enumerate}
+    \item \textbf{Lesbarkeit}\\
+    Das Code sollte für Menschen verständlich sein, nicht nur für Maschinen. Lesbarer Code ermöglicht es Entwicklern, den Zweck und die Funktionsweise des Codes schnell zu erfassen, was besonders bei der Zusammenarbeit im Team und der Fehlerbehebung wichtig ist. Lesbarkeit wird durch klare Namensgebung, konsistente Formatierung und die Vermeidung unnötiger Komplexität erreicht.
+    
+    \item \textbf{Einfachheit}\\
+    Einfachheit bedeutet, dass Code so geschrieben wird, dass der Code bewusst einfach und übersichtlich gehalten wird, indem unnötige Abstraktionen vermieden, kurze Funktionen geschrieben und jede Komponente auf eine klar definierte Aufgabe begrenzt wird. Dies erhöht die Verständlichkeit, reduziert Fehleranfälligkeit und erleichtert die langfristige Wartung.
+    
+    \item \textbf{Modularität}\\
+    Die Modularisierung spielt eine entscheidende Rolle im Clean Code. Sie beschreibt die Aufteilung von umfangreichem, komplexem Code in kleinere, eigenständige Module oder Funktionen, wodurch der Code verständlicher, wartungsfreundlicher und besser testbar wird.
+    
+    \item \textbf{Testbarkeit}\\
+    Die Testbarkeit ist ein wesentlicher Indikator für die Qualität des Codes. Gut strukturierter Code ermöglicht eine einfache und automatisierte Überprüfung von Funktionalität und Effizienz, was auf eine exzellente Entwicklungsarbeit hinweist.
+    \item \textbf{Konsistenz}\\
+    Konsistenz im Code bedeutet, einen einheitlichen Stil, eine konsistente Struktur und ein durchgängiges Format in der gesamten Codebasis beizubehalten. Diese Praxis ist entscheidend, da sie die Lesbarkeit verbessert und es Entwicklern erleichtert, den Code schnell zu verstehen und effizient daran zu arbeiten.
+    
+    \item \textbf{DRY}\\
+    DRY („Don't Repeat Yourself“) ist ein zentrales Konzept im Clean Code. Die Wiederholung desselben Codes beeinträchtigt nicht nur die Einfachheit und Klarheit, sondern erschwert auch die Wiederverwendbarkeit und Wartbarkeit der Software. Um die Lesbarkeit und Wartungsfreundlichkeit zu gewährleisten, sollten redundante Codeabschnitte so weit wie möglich vermieden werden.
+   
+
+    \item \textbf{Minimerung von Abhängigkeiten}\\
+    Die Minimierung von Abhängigkeiten ist ein zentrales Prinzip von Clean Code. Ein Code mit wenigen Abhängigkeiten ist einfacher zu verstehen, zu testen und zu warten. Durch klare Schnittstellen und lose Kopplung wird die Flexibilität erhöht, wodurch Änderungen in einer Komponente weniger Auswirkungen auf andere Teile des Systems haben.
+    
+    \item \textbf{Selbstdokumentation}\\
+    Klare Benennungen, logische Strukturen und eine verständliche Syntax machen externe Kommentare weitgehend überflüssig. Dies erhöht die Lesbarkeit und erleichtert es Entwicklern, den Code schnell zu verstehen und effizient daran zu arbeiten. Kommentare sollten nur verwendet werden, wenn der Code nicht selbsterklärend ist.
+
+\end{enumerate}
+    
+\section{Methodology}
+In dieser Studie wird der Auswirkungen der Clean-Code-Prinzipien auf Unit-Tests durch
+Literaturrecherche untersucht. Durch die Analyse von Source-Code-Beispielen wird evaluliert,
+wie lesbarer Code die Unit-Tests beeinflusst, und es werden die Schlussfolgerungen
+getroffen.
+
+\section{Ergebnisse und Diskussion}
+Design ist ein wichtiger Faktor, um die Struktur der Software wartbar zu machen und ihr
+Verhalten beizubehalten. In diesem Zusammenhang ist Clean Code das Rückgrat der Soft-
+wareentwicklung. Abbildung~\ref{fig:clean_code_perception} zeigt die Wahrnehmung von Entwicklern bezüglich der Auswirkungen von Clean Code auf verschiedenen Kriterien.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xbar=0pt,
+            width=0.40\textwidth, % Sayfanın yarısını kaplayacak genişlik
+            height=7cm,          % Daha dengeli bir yükseklik
+            bar width=7pt,
+            xlabel={Responses},
+            symbolic y coords={
+                Maintainability,
+                Reusability,
+                Understandability,
+                Readability
+            },
+            ytick=data,
+            nodes near coords,
+            xmin=0,
+            xmax=40,
+            enlarge y limits=0.5,
+            legend style={at={(1.1,-0.15)}, anchor=north, legend columns=1},
+            reverse legend,
+        ]
+            \addplot coordinates {(35,Readability) (35,Understandability) (25,Reusability) (30,Maintainability)};
+            
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Perception of Clean Code on Activities}
+    \label{fig:clean_code_perception}
+\end{figure}
+ An der von Kevin Ljung und Javier Gonzalez-Huerta im Jahr 2022 durch-
+geführten Umfrage mit dem Titel ”To Clean-Code or Not To Clean-Code“ A Survey among
+Practitioners nahmen 39 Personen teil, und es wurden 771 Arbeiten untersucht.\cite{ljung2022cleancode} Den Ergebnissen der Umfrage zufolge zeigten die meisten Teilnehmer, dass die Anwendung von
+Clean-Code-Prinzipien die Codequalität erheblich verbessert.\\
+
+\subsection{Code Smells und Refactoring}
+
+Code Smells sind häufig subtile Hinweise darauf, dass im Code strukturelle oder designbedingte Schwächen vorliegen könnten. Auch wenn sie die Funktionalität der Software nicht direkt beeinträchtigen,  können sie langfristig die Wartbarkeit und Erweiterbarkeit erschweren. Übermäßig große Klassen und Methoden, die zu viele Verantwortlichkeiten übernehmen, oder redundanter, wiederholter Code sind typische Beispiele, die auf solche potenziellen Schwächen hinweisen.\cite{suryanarayana2014refactoring}
+\\\\
+In der Softwareentwicklung steht die Auseinandersetzung mit solchen Problemen oft in engem Zusammenhang mit dem Konzept des Refactorings. Die Umstrukturierung eines Programms, ohne dessen bestehendes Verhalten zu verändern, ist ein zentraler Ansatz, um Code Smells gezielt anzugehen. Während dieses Prozesses spielen Tests eine wesentliche Rolle, da sie sicherstellen, dass funktionale Anforderungen auch nach Änderungen unverändert erfüllt bleiben. \cite{Berzal_2005} \\
+
+ In folgendem Beispiel haben wir eine Methode, die den Gesamtpreis einer Bestellung berechnet. Die ursprüngliche Version der Methode ist relativ lang und führt die Berechnung direkt in der Hauptmethode aus. Nach dem Refactoring wurde die Steuerberechnung in eine separate Methode ausgelagert, wodurch der Code klarer, modularer und besser wiederverwendbar wird.
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.45\textwidth} % Sayfanın genişliğinin yarısı
+        \begin{lstlisting}[caption=Vor Refactoring: Long Method, label=code:long_method]
+public double calculateTotalOrderPrice(Order order) {
+    double total = 0.0;
+    for (Item item : order.getItems()) {
+        double itemPrice = item.getPrice();
+        double tax = itemPrice * 0.2; // Steuer berechnen
+        total += itemPrice + tax;
+    }
+    return total;
+}
+        \end{lstlisting}
+    \end{minipage}
+    \vspace{1em}
+    \begin{minipage}{0.45\textwidth} % Sayfanın genişliğinin yarısı
+        \begin{lstlisting}[caption=Nach Refactoring: Methoden extrahiert, label=code:refactored_method]
+public double calculateTotalOrderPrice(Order order) {
+    double total = 0.0;
+    for (Item item : order.getItems()) {
+        total += calculateItemPriceWithTax(item);
+    }
+    return total;
+}
+
+private double calculateItemPriceWithTax(Item item) {
+    double tax = item.getPrice() * 0.2; // Steuer berechnen
+    return item.getPrice() + tax;
+}
+        \end{lstlisting}
+    \end{minipage}
+\end{figure}
+
+Die Identifikation von Code Smells und das anschließende Refactoring sind dabei keine isolierten Prozesse, sondern vielmehr integraler Bestandteil einer sauberen und nachhaltigen Codebasis. Clean Code-Prinzipien, die auf Einfachheit, Klarheit und Modularität abzielen, bieten hier eine solide Orientierung. Interessanterweise führt die schrittweise Entfernung von Code Smells nicht nur zu einem besseren Design, sondern auch zu einer verbesserten Testbarkeit des Codes. Sauber strukturierter Code erleichtert es, präzise und effektive Tests zu schreiben, wodurch wiederum die Zuverlässigkeit und Stabilität der Software erhöht wird.\\
+
+Refactoring, Clean Code und Unit-Tests bilden somit eine symbiotische Beziehung. Während Refactoring und Clean Code darauf abzielen, die langfristige Wartbarkeit und Stabilität der Software zu gewährleisten, bieten Unit-Tests die notwendige Absicherung, um diese Prozesse risikofrei durchzuführen. Diese enge Verzahnung zeigt, wie Refactoring und Clean Code die Testbarkeit und somit die Gesamtqualität eines Softwareprojekts erheblich verbessern können.\\
+
+Durch diesen Ansatz wird nicht nur die Codequalität erhöht, sondern auch die Effizienz des Entwicklungsprozesses gesteigert, da Probleme frühzeitig erkannt und behoben werden können. Sauberer Code, unterstützt durch robuste Unit-Tests, stellt sicher, dass Softwareprojekte langfristig stabil, skalierbar und wartbar bleiben.
+
+\subsection{Kostenreduzierung von Test durch Clean Code }
+Die Anwendung von Clean Code-Prinzipien spielt eine entscheidende Rolle bei der Reduzierung der Kosten, die mit Tests und Wartung verbunden sind. Sauberer, gut strukturierter Code erleichtert nicht nur die Implementierung, sondern verringert auch den Aufwand für das Schreiben und Warten von Tests. Einer der zentralen Vorteile von Clean Code liegt in der höheren Lesbarkeit und Verständlichkeit des Codes, was es Entwicklern ermöglicht, schneller auf Fehler oder Änderungen zu reagieren.\\
+
+Ein klar strukturierter Code reduziert die Anzahl der potenziellen Fehlerquellen, da weniger redundanter oder komplexer Code vorhanden ist. Weniger Fehler führen wiederum zu einer geringeren Anzahl von Tests, die erforderlich sind, um die Stabilität der Software zu gewährleisten. Auch die Zeit, die für die Fehlersuche und die anschließende Behebung aufgewendet wird, verringert sich signifikant.\\
+
+Ein weiterer Aspekt ist die bessere Wiederverwendbarkeit von Tests. Wenn Clean Code-Prinzipien wie Modularität und Konsistenz angewendet werden, sind die einzelnen Komponenten des Codes gut isoliert und unabhängig. Dies erleichtert nicht nur die Testbarkeit, sondern sorgt auch dafür, dass Tests universell einsetzbar sind und bei Änderungen am Code nicht ständig angepasst werden müssen.\\
+
+In der Industrie zeigt sich dies besonders deutlich in agilen Entwicklungsumgebungen, in denen kontinuierliche Integration und automatisierte Tests entscheidend sind. Clean Code beschleunigt den Entwicklungsprozess und minimiert die Kosten für Qualitätskontrolle, da die Teststrategie durch klare und konsistente Codepraktiken unterstützt wird.
+
+\subsection{Anwendungen}
+
+Die Vorteile von Clean Code und Refactoring in Bezug auf Testbarkeit und Kostenreduktion sind nicht nur theoretisch, sondern finden auch in der Praxis zahlreiche Anwendungen. Viele Unternehmen, die agile Methoden wie Scrum oder DevOps anwenden, setzen bewusst auf Clean Code-Prinzipien, um Entwicklungs- und Wartungskosten zu senken.\\
+
+Ein bekanntes Beispiel ist der Einsatz von Clean Code bei großen Softwareprojekten wie der Entwicklung von Webplattformen oder Cloud-Lösungen. Firmen wie Google oder Microsoft nutzen Clean Code-Praktiken, um die Skalierbarkeit und Wartbarkeit ihrer Produkte sicherzustellen. Ein gut dokumentiertes Fallbeispiel ist die Einführung von Clean Code-Prinzipien in einem Finanzsoftwareunternehmen, das durch die konsequente Entfernung von Code Smells und die Verbesserung der Testabdeckung die Fehlerquote um 30\% und die Entwicklungszeit um 20\% reduzieren konnte.\\
+
+In der Automobilindustrie, wo Software zunehmend sicherheitskritische Funktionen steuert, wird Clean Code ebenfalls angewendet. Hier sorgt sauberer Code für eine zuverlässige und schnelle Integration neuer Funktionen, da gut strukturierte Module leicht getestet und in größere Systeme eingebunden werden können.\\
+
+Ein weiteres Beispiel findet sich in der Spieleentwicklung. In dieser Branche, wo kurze Entwicklungszyklen und hohe Qualitätsstandards gefragt sind, ermöglicht Clean Code eine effiziente Zusammenarbeit zwischen Teams. Durch die Verwendung von Clean Code und Unit-Tests konnte ein führender Spieleentwickler die Entwicklungszeit neuer Features um 25\% verkürzen und gleichzeitig die Anzahl der nachträglich entdeckten Fehler halbieren.\\
+
+Diese Beispiele zeigen, dass die Prinzipien von Clean Code in der Industrie nicht nur für eine höhere Codequalität sorgen, sondern auch dazu beitragen, die Kosten für Tests und Wartung nachhaltig zu senken. Durch die Kombination von Clean Code, Refactoring und automatisierten Tests können Unternehmen effizienter arbeiten und die Qualität ihrer Softwareprodukte langfristig sichern.
+
+\section{Fazit}
+
+Die Kombination aus Clean Code, der durch Refactoring kontinuierlich optimiert wird, und robusten Unit-Tests schafft eine stabile Grundlage für moderne Softwareentwicklung. Insbesondere in industriellen Anwendungen ermöglichen diese Praktiken eine höhere Produktivität, schnellere Entwicklungszyklen und eine nachhaltige Qualitätssicherung. Clean Code bleibt daher ein unverzichtbarer Ansatz für erfolgreiche Softwareprojekte.
+\printbibliography
+
+
+\end{document}
